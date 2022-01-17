@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "874386452602",
+    "project_id": "startcampchat-fd981",
+    "storage_bucket": "startcampchat-fd981.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874386452602:android:8808fa506c41c4b530cbc3",
+        "android_client_info": {
+          "package_name": "com.ssafy.startcampchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "874386452602-h9gts6h4gf7j59ep4aq0dbimhiu23j8t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ssafy.startcampchat",
+            "certificate_hash": "044cc0506d861c0ee80d2d9e7ac4d6f5a274d0ec"
+          }
+        },
+        {
+          "client_id": "874386452602-nlpq3tel0u6ipod3k64k78v3dk30hl22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAintrYa9Lmv01T5lwZbT8P5GGlfwFy360"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "874386452602-nlpq3tel0u6ipod3k64k78v3dk30hl22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
