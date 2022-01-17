@@ -14,5 +14,6 @@ public class CheckPoint {
 		if(isFat>0) {
 			System.out.println("당신은 비만입니다.");
 		}
+		sc.close();
 	}
 }

@@ -12,5 +12,6 @@ public class Compute {
 		int mok = a/b;
 		System.out.println("곱 = "+mul);
 		System.out.println("몫 = "+mok);
+		sc.close();
 	}
 }
