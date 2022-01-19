@@ -1,14 +1,13 @@
-package com.ssafy.ws05.step3;
+package com.ssafy.ws07.step3;
 
-public class Magazine extends Book{
-
+public class Magazine extends Book {
 	int year;
 	int month;
 	Magazine(){	}
 	
-	Magazine(String isbn, String title, String author, String publisher, int price, String desc, int year, int month){
+	Magazine(String isbn, String title, String author, String publisher, int price, String desc, int year, int month, int quantity){
 		
-		super(isbn, title, author, publisher, price, desc);
+		super(isbn, title, author, publisher, price, desc, quantity);
 		this.year = year;
 		this.month = month;
 	}
@@ -32,6 +31,4 @@ public class Magazine extends Book{
 	"    | "+this.year+"   | "+this.month;
 		
 	}
-	
-	
 }

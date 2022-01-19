@@ -1,16 +1,16 @@
-package com.ssafy.ws05.step3;
+package com.ssafy.ws07.step3;
 
 public class Book {
-
 	String isbn;
 	String title;
 	String author;
 	String publisher;
 	int price;
 	String desc;
+	int quantity;
 	
 	Book() {}
-	Book(String isbn, String title, String author, String publisher, int price, String desc){
+	Book(String isbn, String title, String author, String publisher, int price, String desc, int quantity){
 		this.isbn=isbn;
 		this.title = title;
 		this.author = author;
@@ -54,11 +54,15 @@ public class Book {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity=quantity;
+	}
 	
 	public String toString() {
 		return this.isbn + "| " + this.title + "       | "+this.author+"   | "+this.publisher+"        | "+this.price+"  | "+this.desc;
 		
 	}
-	
-	
 }
