@@ -1,6 +1,7 @@
 package com.ssafy.ws07.step3;
 
-public class Magazine extends Book {
+public class Magazine extends Book{
+
 	int year;
 	int month;
 	Magazine(){	}
@@ -28,7 +29,9 @@ public class Magazine extends Book {
 	public String toString() {
 		return super.isbn + "| " + super.title + "       | "
 	+super.author+"   | "+super.publisher+"        | "	+super.price+"  | "+super.desc+
-	"    | "+this.year+"   | "+this.month;
+	"    | "+this.year+"   | "+this.month+"  |  "+super.quantity;
 		
 	}
+	
+	
 }

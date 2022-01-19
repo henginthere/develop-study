@@ -1,6 +1,7 @@
 package com.ssafy.ws07.step3;
 
 public class Book {
+
 	String isbn;
 	String title;
 	String author;
@@ -17,6 +18,7 @@ public class Book {
 		this.publisher = publisher;
 		this.price = price;
 		this.desc = desc;
+		this.quantity=quantity;
 	}
 	public String getIsbn() {
 		return isbn;
@@ -58,11 +60,14 @@ public class Book {
 		return quantity;
 	}
 	public void setQuantity(int quantity) {
-		this.quantity=quantity;
+		this.quantity = quantity;
 	}
 	
 	public String toString() {
-		return this.isbn + "| " + this.title + "       | "+this.author+"   | "+this.publisher+"        | "+this.price+"  | "+this.desc;
+		return this.isbn + "| " + this.title + "       | "+this.author+"   | "+this.publisher+"        | "+this.price+"  | "+this.desc
+				+" |   "+this.quantity;
 		
 	}
+	
+	
 }
