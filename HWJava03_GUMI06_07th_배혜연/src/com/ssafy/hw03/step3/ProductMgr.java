@@ -108,6 +108,7 @@ public class ProductMgr {
 				products.remove(p);
 			}
 		}
+		
 	}
 	
 	//전체 재고 상품 금액
