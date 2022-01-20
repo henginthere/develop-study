@@ -24,55 +24,6 @@ public class ProductTest {
 		
 		mg.saveData();
 		
-		System.out.println("***************************상품 전체 정보***************************");
-		for(Product p:mg.viewAll()) {
-			System.out.println(p);
-		}
-		
-		System.out.println("***************************상품 번호로 검색: 12534 ***************************");
-		
-		System.out.println(mg.searchbypNum("12534"));
-		
-		System.out.println("***************************상품명으로 검색: RF ***************************");
-
-		for(Product p:mg.searchbyName("RF")) {
-			System.out.println(p);
-		}
-		
-		System.out.println("***************************TV만 검색 ***************************");
-
-		for(Product p:mg.searchTV()) {
-			System.out.println(p);
-		}
-		
-		System.out.println("***************************Refrigerator만 검색 ***************************");
-
-		for(Product p:mg.searchRF()) {
-			System.out.println(p);
-		}
-		
-		System.out.println("***************************400L이상 Refrigerator만 검색 ***************************");
-
-		for(Product p:mg.searchOver400()) {
-			System.out.println(p);
-		}
-		System.out.println("***************************50inch이상 TV만 검색 ***************************");
-
-		for(Product p:mg.searchOver50()) {
-			System.out.println(p);
-		}
-		
-		System.out.println("***************************12345번 상품 가격수정:450000원 ***************************");
-
-		mg.changePrice("12345", 450000);
-		System.out.println(mg.searchbypNum("12345"));
-		
-//		System.out.println("***************************12345번 상품 삭제 ***************************");
-//
-//		mg.remove("12345");
-//		
-		
-		System.out.println("상품 재고 가격 총합 : "+mg.getTotalPrice());
 		
 		
 	}

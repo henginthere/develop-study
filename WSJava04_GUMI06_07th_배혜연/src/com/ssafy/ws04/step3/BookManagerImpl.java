@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import com.ssafy.ws04.step3.Book;
 import com.ssafy.ws04.step3.Magazine;
 import com.ssafy.ws04.step3.ISBNNotFoundException;
+import com.ssafy.ws04.step3.myThread;
 
 public class BookManagerImpl implements IBookManager{
-
 	
 	private static BookManagerImpl instance;
 	
@@ -145,44 +145,11 @@ public class BookManagerImpl implements IBookManager{
 	//book.dat 파일에서 도서리스트 읽어오는 메서드
 	private void loadData() {
 		
-		FileInputStream fis = null;
-		ObjectInputStream ois = null;
+		myThread th = new myThread();
+		Thread t = new Thread(th,"thread");
 		
-		try {
-			fis = new FileInputStream("book.dat");
-			ois = new ObjectInputStream(fis);
-
-			ArrayList<Object> tmp = new ArrayList<>();
+		t.start();
 		
-			tmp=(ArrayList<Object>) ois.readObject();
-
-			System.out.println("****************************불러온 도서 전체 목록****************************");
-			for(Object o:tmp) {
-				System.out.println(o);
-			}
-		
-		}
-		catch (FileNotFoundException e) {
-			//e.printStackTrace();
-			System.out.println("****************************불러온 도서 전체 목록****************************");
-			System.out.println("등록된 도서가 없습니다.");
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				ois.close();
-				fis.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}catch (NullPointerException e) {
-				
-			}
-		}
 	}
 	
 

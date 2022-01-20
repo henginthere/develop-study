@@ -11,6 +11,7 @@ import java.util.Iterator;
 
 import com.ssafy.hw04.step3.Product;
 import com.ssafy.hw04.step3.Tv;
+import com.ssafy.hw04.step3.myThread;
 import com.ssafy.hw04.step3.Refrigerator;
 
 
@@ -131,46 +132,12 @@ public class ProductMgr {
 	}
 
 private void loadData() {
+	
+		myThread th = new myThread();
+		Thread t = new Thread(th,"thread");
 		
-		FileInputStream fis = null;
-		ObjectInputStream ois = null;
+		t.start();
 		
-		try {
-			//fis = new FileInputStream("product.dat");
-			fis = new FileInputStream("product_.dat");
-			ois = new ObjectInputStream(fis);
-
-			ArrayList<Object> tmp = new ArrayList<>();
-		
-			tmp=(ArrayList<Object>) ois.readObject();
-
-			System.out.println("****************************불러온 상품 전체 목록****************************");
-			for(Object o:tmp) {
-				System.out.println(o);
-			}
-		
-		}
-		catch (FileNotFoundException e) {
-			//e.printStackTrace();
-			System.out.println("****************************불러온 상품 전체 목록****************************");
-			System.out.println("등록된 상품이 없습니다.");
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				ois.close();
-				fis.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}catch (NullPointerException e) {
-				
-			}
-		}
 	}
 	
 
