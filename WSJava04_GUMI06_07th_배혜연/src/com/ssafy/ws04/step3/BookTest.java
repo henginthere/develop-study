@@ -8,6 +8,7 @@ public class BookTest {
 
 	public static void main(String[] args) {
 		
+		//객체 생성시 파일 불러오기
 		BookManagerImpl bm = BookManagerImpl.getInstance();
 		
 		Book book1 = new Book("21424", "Java Pro", "김하나", "jean.kr",15000, "Java 기본문법",5);
@@ -20,7 +21,7 @@ public class BookTest {
 		bm.add(book2);
 		bm.add(book3);
 		bm.add(magazine1);
-		//bm.clear();
+	
 		//파일에 도서 저장
 		bm.saveData();
 		
