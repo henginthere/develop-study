@@ -65,10 +65,14 @@ public class ProductTest {
 		mg.changePrice("12345", 450000);
 		System.out.println(mg.searchbypNum("12345"));
 		
-//		System.out.println("***************************12345번 상품 삭제 ***************************");
-//
-//		mg.remove("12345");
-//		
+		System.out.println("***************************12345번 상품 삭제 ***************************");
+
+		mg.remove("12345");
+		
+		System.out.println("***************************삭제 후 상품 전체 정보***************************");
+		for(Product p:mg.viewAll()) {
+			System.out.println(p);
+		}
 		
 		System.out.println("상품 재고 가격 총합 : "+mg.getTotalPrice());
 		
