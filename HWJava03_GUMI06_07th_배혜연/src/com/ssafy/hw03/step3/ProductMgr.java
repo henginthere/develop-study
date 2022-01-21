@@ -1,7 +1,6 @@
 package com.ssafy.hw03.step3;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import com.ssafy.hw03.step3.Product;
 import com.ssafy.hw03.step3.Tv;
@@ -103,12 +102,20 @@ public class ProductMgr {
 	}
 	//상품 번호로 삭제
 	public void remove(String pNum) {
-		for(Product p : products) {
-			if(p.getpNum().equals(pNum)) {
-				products.remove(p);
+//		for(Product p : products) {
+//			if(p.getpNum().equals(pNum)) {
+//				products.remove(p);
+//			}
+//		}
+//		
+
+		for (int i = products.size() - 1; i >= 0; i--) {
+			Product p = products.get(i);
+			if (p.getpNum().equals(pNum)) {
+				products.remove(i);
+				break;
 			}
 		}
-		
 	}
 	
 	//전체 재고 상품 금액

@@ -36,6 +36,7 @@ public class ProductMgr {
 	
 	//상품 번호로 검색
 	public Product searchbypNum(String pNum) {
+	
 		Product tmp = new Product();
 		for(Product p : products) {
 			if(p.getpNum().equals(pNum)) {
@@ -112,9 +113,12 @@ public class ProductMgr {
 	}
 	//상품 번호로 삭제
 	public void remove(String pNum) {
-		for(Product p : products) {
-			if(p.getpNum().equals(pNum)) {
-				products.remove(p);
+		for (int i = products.size() - 1; i >= 0; i--) {
+
+			Product tmp = products.get(i);
+			if (tmp.getpNum().equals(pNum)) {
+				products.remove(i);
+				break;
 			}
 		}
 		

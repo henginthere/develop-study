@@ -17,8 +17,8 @@ public class myThread implements Runnable{
 		ObjectInputStream ois = null;
 		
 		try {
-			//fis = new FileInputStream("product.dat");
-			fis = new FileInputStream("product_.dat");
+			fis = new FileInputStream("product.dat");
+			//fis = new FileInputStream("product_.dat");
 			ois = new ObjectInputStream(fis);
 
 			ArrayList<Object> tmp = new ArrayList<>();
