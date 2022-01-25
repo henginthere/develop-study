@@ -9,7 +9,9 @@ where emp.deptno=
 #2
 select empno, ename, job, deptno
 from emp
-where mgr!=empno;
+where empno not in( select a.empno
+					from emp a join emp b
+					on a.empno=b.mgr) ;
 
 #3
 select ename, job, mgr
