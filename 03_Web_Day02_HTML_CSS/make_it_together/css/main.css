@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header {
+  height: 70px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+.header > .nav {
+  position: relative;
+  margin: auto;
+  max-width: 1200px;
+  width: calc(100% - 120px);
+  height: 70px;
+}
+
+#logo {
+  font-size: 30px;
+  font-weight: bold;
+  color: mediumpurple;
+  cursor: pointer;
+}
+
+.nav > a {
+  float: left;
+  margin-left: 20px;
+  line-height: 70px;
+  height: 70px;
+}
+
+.menu {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.menu > li {
+  float: left;
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.menu > li:last-child {
+  margin-right: 10px;
+}
+
+.menu-item {
+  color: darkgray;
+}
+
+.menu-item:hover {
+  color: mediumpurple;
+}
