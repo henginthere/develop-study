@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        .viewtime{
+            font-size: 30px;
+            color: magenta;
+        }
+    </style>
+
+    <script type=""text/javascript" src="./js/httpRequest.js"></script>
+    <script type="text/javascript">
+        // server의 시간 보기
+        function getTime(){
+            //url, params, callback, method
+            sendRequest("1-03currenttime.jsp", null, viewTime, "GET"); //서버로부터 응답을 받게되면 viewTime 실행
+        }
+
+        function viewTime(){
+            if (httpRequest.readyState ==4){ 
+                if(httpRequest.status ==200){
+                    let time = httpRequest.responseText; //서버로부터 응답받은 데이터가 저장되어있다 (여기서는 현재시간 문자열)
+                    let div = document.getElementById("curtime");
+                    div.setAttribute("class", "viewtime");
+                    div.innerHTML = time;
+                }
+            }
+        }
+
+        function getTimer(){
+            window.setInterval("getTime()",1000); //(함수명, 밀리초) 1초마다 갱신
+        }
+    </script>
+</head>
+<body>
+   <h2>현재 시간</h2> 
+   <button onclick="javascript:getTime()">시간보기</button>
+   <button onclick="javascript:getTimer()">시계보기</button>
+   <div id="curtime"></div>
+</body>
+</html>

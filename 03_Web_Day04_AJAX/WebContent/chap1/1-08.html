@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <style type="text/css">
+      table {
+        width: 300px;
+        height: 100px;
+        border-collapse: collapse;
+        border: 1px solid blue;
+      }
+      tr, th,
+      td {
+        border: 1px solid blue;
+        text-align: center;
+      }
+    </style>
+    <script type="text/javascript" src="./js/httpRequest3.js"></script>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('listBtn').addEventListener('click', function () {
+          sendRequest3('1-08json.jsp', null, 'GET', makeList, error, "json", loadstart, loadend);
+        });
+      });
+      
+      function loadstart() {
+    	  // 로딩 이미지를 보여주기
+    	  document.getElementById("loading").style.display = "block";
+      }
+      
+      function loadend() {
+    	  // 로딩 이미지를 숨기기
+    	  document.getElementById("loading").style.display = "none";
+      }
+
+      function makeList(data) {
+        console.log(data);
+        let tbody = document.getElementById("studentinfo");
+
+        // let students = data.getElementsByTagName("student");
+        const students = JSON.parse(data);
+        console.log(students);
+
+        for (var i = 0; i < students.length; i++) {
+          let student = [];
+          // student[0] = students[i].getElementsByTagName("id")[0].childNodes[0].nodeValue;
+          // student[1] = students[i].getElementsByTagName("name")[0].childNodes[0].nodeValue;
+          // student[2] = students[i].getElementsByTagName("class")[0].childNodes[0].nodeValue;
+          // student[3] = students[i].getE1lementsByTagName("grade")[0].childNodes[0].nodeValue;
+
+          student[0] = students[i].id;
+          student[1] = students[i].name;
+          student[2] = students[i].class;
+          student[3] = students[i].grade;
+
+          let tr = document.createElement("tr");
+
+          for (var j = 0; j < student.length; j++) {
+            let td = document.createElement("td");
+            td.appendChild(document.createTextNode(student[j]));
+            tr.append(td);
+          }
+
+          tbody.append(tr);
+        }
+      }
+      
+      function error(status, msg) {
+        console.log("상태값: " + status + " / http에러메시지 :" + msg);
+      } 
+    </script>
+  </head>
+  <body>
+  	<div id="loading" style="display: none">
+  		데이터 조회중 입니다. <br>
+  		<img src="loading.gif" width="100"/>
+  	</div>
+    <h3>SSAFY 분반</h3>
+    <button id="listBtn">학생정보보기</button>
+    <table>
+      <tr>
+        <th>학번</th>
+        <th>이름</th>
+        <th>분반</th>
+        <th>성적</th>
+      </tr>
+      <tbody id="studentinfo"></tbody>
+    </table>
+  </body>
+</html>
