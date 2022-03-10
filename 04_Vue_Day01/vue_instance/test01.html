@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>{{message}}</h2>
+    </div>
+    <script>
+        //vue 객체 만들어야 함. new 키워드 이용
+        new Vue({
+            el: '#app', //el = element의 약자. vue를 이용할 element 지정. 11~13라인 vue 객체를 이용 가능
+            data(){
+                return {
+                    message: '첫 번째 Vue.js 앱 입니다.'
+                }
+            }
+        });
+    </script>
+</body>
+</html>
