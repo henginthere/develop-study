@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <span>나이 : </span>
+            <input type="number" v-model="age" />
+        </div>
+        <div>
+            요금 :
+            <span v-if="age < 10">무료</span>
+            <span v-else-if="age < 20">7000원</span>
+            <span v-else-if="age < 65">10000원</span>
+            <span v-else>3000원</span>
+        </div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                age: '0',
+            },
+        });
+    </script>
+</body>
+</html>
