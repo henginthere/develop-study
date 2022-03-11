@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vue.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h2>props test</h2>
+    <child-component propsdata="안녕하세요"></child-component>
+    <!-- 동적 props -->
+    <!-- <child-component v-bind:propsdata="message"></child-component> -->
+  </div>
+  <script>
+    //하위 컴포넌트
+    Vue.component('ChildComponent', {
+      props: ['propsdata'],
+      template: '<span>{{ propsdata }}</span>',
+    });
+    new Vue({
+      el: '#app',
+      // data() {
+      //   return {
+      //     message: 'hello ssafy',
+      //   };
+      // },
+    });
+  </script>
+</body>
+
+</html>
