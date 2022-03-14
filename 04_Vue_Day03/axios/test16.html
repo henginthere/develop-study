@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div id="result">
+        <table>
+          <tr>
+            <th>글번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr v-for="(article, index) in articles">
+            <td>{{article.no}}</td>
+            <td>
+              <span v-show="!article.isModify">{{article.title}}</span>              
+              <span v-show="article.isModify"><input type="text" v-model="article.title" placeholder="제목을 입력하세요"></span>
+            </td>
+            <td>{{article.writer}}</td>
+            <td>{{article.regtime}}</td>
+            <td>
+              <input v-show="!article.isModify" type="button" value="수정" v-on:click="article.isModify = !article.isModify" />
+              <input v-show="article.isModify" type="button" value="저장" v-on:click="updateArticle(article.no, index)" />
+            </td>
+            <td><input type="button" value="삭제" v-on:click="deleteArticle(article.no)" /></td>
+          </tr>
+        </table>
+      </div>
+      <br>
+      <div>
+        제목 : <input type="text" v-model="title" placeholder="제목을 입력하세요"><br>
+        내용 : <input type="text" v-model="content" placeholder="내용을 입력하세요"> 
+        <input type="button" v-on:click="saveArticle" value="입력"><br> 
+      </div>
+    </div>
+    <script>
+      const addr = 'http://localhost:9999/vue/api/board';
+
+      new Vue({
+        el: '#app',
+        data: {
+          articles: [],
+          writer : "ssafy",
+          title : "",
+          content : "",
+        },
+        methods: {
+          updateArticle(no, index){
+            axios
+            .put( addr + "/" + no, {
+              writer: this.writer, title:this.articles[index].title, content:this.articles[index].content
+            })
+            .then((response) => {
+              this.getAllArticles();
+            })
+            .catch((error) => {
+              console.dir(error);
+            });
+          },
+          deleteArticle(no){
+            axios
+            .delete( addr+"/" + no)
+            .then((response) => {
+              this.getAllArticles();
+            })
+            .catch((error) => {
+              console.dir(error);
+            });
+          },
+          saveArticle (){
+            // axios
+            // .post( addr , {
+            //   writer: this.writer, title:this.title, content:this.content
+            // })
+            axios({
+              method:'post',
+              url : addr,
+              data : {writer: this.writer, title:this.title, content:this.content}
+            })
+            .then((response) => {
+              this.getAllArticles();
+            })
+            .catch((error) => {
+              console.dir(error);
+            });
+            this.title="";
+            this.content="";
+          }, 
+          getAllArticles(){
+            axios
+            .get(addr)
+            .then((response) => {
+              // this.articles = response.data;
+              let result = response.data
+              //배열내 모든 object에 isModify를 추가
+              result.forEach(function(element) {
+                  element.isModify = false;
+              });
+              this.articles = result;
+              // console.log(this.articles)
+            })
+            .catch((error) => {
+              console.dir(error);
+            });
+          }
+        },
+        created() {
+          this.getAllArticles();
+        },
+      });
+    </script>
+  </body>
+</html>

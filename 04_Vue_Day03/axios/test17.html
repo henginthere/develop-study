@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div id="result">
+        <table>
+          <tr>
+            <th>글번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr v-for="(article, index) in articles">
+            <td>{{article.no}}</td>
+            <td>
+              <span>{{article.title}}</span>              
+            </td>
+            <td>{{article.writer}}</td>
+            <td>{{article.regtime}}</td>
+            <td>
+              <input type="button" value="수정" v-on:click="getArticle(article.no)" />
+            </td>
+            <td><input type="button" value="삭제" v-on:click="deleteArticle(article.no)" /></td>
+          </tr>
+        </table>
+      </div>
+      <br>
+      <div>
+        <h3>입력</h3>
+        제목 : <input type="text" v-model="title" placeholder="제목을 입력하세요"><br>
+        내용 : <textarea v-model="content" placeholder="내용을 입력하세요"> </textarea>
+        <input type="button" v-on:click="saveArticle" value="입력"><br> 
+      </div>
+
+      <div>
+        <h3>수정</h3>
+        제목 : <input type="text" v-model="updateTitle" placeholder="제목을 입력하세요"><br>
+        내용 : <textarea v-model="updateContent" placeholder="내용을 입력하세요"> </textarea>
+        <input type="button" v-on:click="updateArticle" value="수정"><br> 
+      </div>
+    </div>
+    <script>
+      const addr = 'http://localhost:9999/vue/api/board';
+
+      new Vue({
+        el: '#app',
+        data: {
+          articles: [],
+          writer : "ssafy",
+          title : "",
+          content : "",
+
+          updateWriter : "ssafy",
+          updateTitle : "",
+          updateContent : "",
+          updateNo : Number,
+        },
+        methods: {
+          getArticle (no){
+            axios
+            .get(addr + "/" + no)
+            .then((response) => {
+              let result = response.data
+              this.updateTitle = result.title
+              this.updateContent = result.content
+              this.updateNo = no
+            })
+            .catch((error) => {
+              console.dir(error);
+            });
+
+          },
+          updateArticle(){
+            axios
+            .put( addr + "/" + this.updateNo, {
+              writer: this.updateWriter, title:this.updateTitle, content:this.updateContent
+            })
+            .then((response) => {
+              this.getAllArticles();
+            })
+            .catch((error) => {
+              console.dir(error);
+            });
+          },
+          deleteArticle(no){
+            axios
+            .delete( addr+"/" + no)
+            .then((response) => {
+              this.getAllArticles();
+            })
+            .catch((error) => {
+              console.dir(error);
+            });
+          },
+          saveArticle (){
+            // axios
+            // .post( addr , {
+            //   writer: this.writer, title:this.title, content:this.content
+            // })
+            axios({
+              method:'post',
+              url : addr,
+              data : {writer: this.writer, title:this.title, content:this.content}
+            })
+            .then((response) => {
+              this.getAllArticles();
+            })
+            .catch((error) => {
+              console.dir(error);
+            });
+            this.title="";
+            this.content="";
+          }, 
+          getAllArticles(){
+            axios
+            .get(addr)
+            .then((response) => {
+              let result = response.data
+              this.articles = result;
+              // console.log(this.articles)
+            })
+            .catch((error) => {
+              console.dir(error);
+            });
+          }
+        },
+        created() {
+          this.getAllArticles();
+        },
+      });
+    </script>
+  </body>
+</html>
