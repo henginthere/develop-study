@@ -1,9 +1,9 @@
 <template>
     <div>
         <h1 class="underline">도서 목록</h1>
-        <!-- <div style="text-align: right">
+        <div style="text-align: right">
             <button @click="movePage">도서 등록</button>
-        </div> -->
+        </div>
         <div v-if="books.length">
             <table id="book-list">
                 <colgroup>
@@ -26,7 +26,7 @@
                     <tr v-for="(book, index) in books" :key="index">
                         <td>{{ index + 1 }}</td>
                         <td>{{ book.isbn }}</td>
-                        <td><a :href="'view.html?isbn=' + book.isbn">{{ book.title }}</a></td>
+                        <td><router-link :to="{name: 'book-detail',params: {isbn:book.isbn}}">{{ book.title }}</router-link></td>
                         <td>{{ book.author }}</td>
                         <td>{{ book.price | priceFilter }}</td>
                     </tr>
@@ -39,13 +39,10 @@
 
 <script>
 import http from '@/util/http-common.js';
-import BookList from '@/components/book/BookList.vue';
+
 
 export default {
-  name: 'BookView',
-  components: {
-    BookList
-  },
+ 
 data: function() {
     return {
       books: [],
@@ -64,7 +61,7 @@ data: function() {
   },
   methods: {
     movePage() {
-      this.$router.push('/');
+      this.$router.push({name: 'book-create'});
     },
   }
 };
