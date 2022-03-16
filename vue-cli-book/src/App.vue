@@ -81,6 +81,7 @@ export default {
     font-weight: bold;
   }
   .underline {
+    text-align: center;
     display: inline-block;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 70%, cyan 30%);
   }
