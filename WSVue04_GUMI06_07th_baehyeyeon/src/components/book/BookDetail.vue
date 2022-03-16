@@ -53,6 +53,6 @@ export default ({
                     this.moveList();
                 })
         }
-    }
+    },
 })
 </script>
