@@ -28,7 +28,7 @@
                         <td>{{ book.isbn }}</td>
                         <td><router-link :to="{name: 'book-detail',params: {isbn:book.isbn}}">{{ book.title }}</router-link></td>
                         <td>{{ book.author }}</td>
-                        <td>{{ book.price | priceFilter }}</td>
+                        <td>{{ book.price | priceFilter }}원</td>
                     </tr>
                 </tbody>
             </table>
@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import http from '@/util/http-common'
 import {mapGetters} from "vuex"
 export default {
 // name: "bookList",
@@ -53,31 +52,16 @@ export default {
   created() {
     this.$store.dispatch("getBooks");
   },
- name: 'BookList',
-
-
-    // created() {
-    //      this.getAllBooks()
-
-    //     // 가격순으로 정렬
-    //     this.books.sort((a, b) => {
-    //         return -(a.price - b.price);
-    //     });
-    // },
   methods: {
-    getAllBooks() {
-            http
-                .get("/book")
-                .then((response) => {
-                    this.books = response.data
-                })
-                .catch((error) => {
-                    console.dir(error)
-                })
-        },
     movePage() {
       this.$router.push({name: 'book-create'});
     },
-  }
+  },
+  filters:{
+        priceFilter: function(value){
+            if(!value) return value;
+            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+    }
 };
 </script>
