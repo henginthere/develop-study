@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+	<bean id="greeting" class="com.ssafy.bean.GreetingService"></bean>
+	<bean id="bying" class="com.ssafy.bean.ByingService"></bean>
+	<bean id="greeting-aop" class="com.ssafy.aspect.GreetingAspect"></bean>
+	
+	<aop:config>
+		<aop:aspect id="aspect" ref="greeting-aop"> <!-- ref : 참조한다 -->
+			<aop:pointcut expression="execution(* say*(..))" id="point-cut"/> <!-- pointcut : 어떤 부분에 aop를 적용할건지 작성 -->
+			<aop:before method="start" pointcut-ref="point-cut" />
+			<aop:after method="end" pointcut-ref="point-cut" />
+			<aop:around method="around" pointcut-ref="point-cut" />
+			<aop:after-returning method="returning" pointcut-ref="point-cut" />
+			<aop:after-throwing method="throwing" pointcut-ref="point-cut" />
+		</aop:aspect>
+	</aop:config>
+
+</beans>
