@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 의존 관계 자동 설정 -->
+<!--
+	byName: 프로퍼티의 이름과 같은 이름을 갖는 빈 객체를 설정한다.
+	byType: 프로퍼티의 타입과 같은 타입을 갖는 빈 객체를 설정한다.
+	constructor: 생성자 파라미터 타입과 같은 타입을 갖는 빈 객체를 생성자에 전달한다.
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+	default-autowire="no">
+
+	<!-- byName -->
+	<bean id="greeting" class="com.tophoon.bean.GreetingService" autowire="byName" />
+	<bean name="dao" class="com.tophoon.bean.KorMessageDAO" />
+	
+	<!-- byType -->
+	<!-- <bean id="greeting" class="com.tophoon.bean.GreetingService" autowire="byType" />
+	<bean name="kor" class="com.tophoon.bean.KorMessageDAO" /> -->
+	
+	<!-- constructor -->
+	<!-- <bean id="greeting" class="com.tophoon.bean.GreetingService" autowire="constructor" />
+	<bean name="eng" class="com.tophoon.bean.EngMessageDAO" /> -->
+	
+	
+	<bean id="greetingByXml" class="com.tophoon.bean.GreetingService">
+		<constructor-arg ref="korDao"></constructor-arg>
+		<property name="dao" ref="engDao"></property>
+	</bean>
+	
+	<bean name="korDao" class="com.tophoon.bean.KorMessageDAO" />
+	<bean name="engDao" class="com.tophoon.bean.EngMessageDAO" />
+
+</beans>
