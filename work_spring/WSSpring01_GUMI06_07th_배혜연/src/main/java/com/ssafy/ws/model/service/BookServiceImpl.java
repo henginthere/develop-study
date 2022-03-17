@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ssafy.ws.dto.Book;
 import com.ssafy.ws.model.repo.BookRepo;
 
-@Service
+@Service("bookservice")
 public class BookServiceImpl implements BookService {
 
 	private BookRepo repo;

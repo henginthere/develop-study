@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ssafy.ws.dto.Book;
 
-@Repository("bookrepoimpl")
+@Repository("bookrepo")
 public class BookRepoImpl implements BookRepo {
 	
 	public BookRepoImpl() {}

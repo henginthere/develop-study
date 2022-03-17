@@ -17,6 +17,5 @@
 		<property name="password" value="ssafy"></property>
 	</bean>
 
-	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 </beans>
