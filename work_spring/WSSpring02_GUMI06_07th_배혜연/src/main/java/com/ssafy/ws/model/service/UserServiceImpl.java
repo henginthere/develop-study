@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.ssafy.ws.dto.User;
 import com.ssafy.ws.model.repo.UserRepo;
 
-@Service
+@Service("userservice")
 public class UserServiceImpl implements UserService {
 
 	private UserRepo repo;

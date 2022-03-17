@@ -14,7 +14,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 @Aspect
 public class LoggingAspect {
 
-	@Pointcut("execution(*(..))")
+	@Pointcut("execution(* com.ssafy.ws.model..*.*(..))")
 	public void pointCut(){}
 	
 	@Before("pointCut()")

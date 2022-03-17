@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ssafy.ws.dto.User;
 
-@Repository
+@Repository("userrepo")
 public class UserRepoImpl implements UserRepo{
 
 	public UserRepoImpl() {}
