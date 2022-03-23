@@ -31,7 +31,7 @@ public class BookRestController {
 	private BookService bService;
 	
 	//Get/api/board 요청했을 때 실행 됨
-	@ApiOperation(value="query string에 해당하는 검색 조건에 해당하는 도서 목록을 반환한다.", response = List.class)
+	@ApiOperation(value="query string에 해당하는 검색 조건에 해당하는 도서 목록을 반환한다.", response = List.class) //response는 return type
 	@GetMapping("/book")
 	public ResponseEntity<?> searchBook(){  // ? : 와일드카드, return 할 때 return 타입 결정된다
 		List<Book> boards = bService.search(); //전체 책을 가져온다
