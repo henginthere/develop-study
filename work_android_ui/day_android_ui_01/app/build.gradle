@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+//애플리케이션 환경 설정
+android {
+    //사용하려는 컴파일러 버전
+    compileSdk 30 //API 30 버전 의미 -> Android 11 버전 의미 (R)
+
+    defaultConfig {
+        //앱을 구별하는 식별자 (unique 해야 한다)
+        applicationId "com.ssafy.helloworld" //패키지명과 동일하다
+        //앱이 동작하기 위해 필요한 최소 버전
+        minSdk 21
+        //개발 시 사용하는 안드로이드 버전
+        targetSdk 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    viewBinding{
+        enabled = true
+    }
+}
+
+//외부 라이브러리를 정의해놓은 부분
+//30 버전에 맞춰 implementation 수정
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.5.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0' // appcompat : Activity + 부가기능
+    implementation 'com.google.android.material:material:1.3.0' //material : 앱의 디자인 적용
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4' //contraintlayout: AndroidX에서 적용된 새로운 Layout
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
