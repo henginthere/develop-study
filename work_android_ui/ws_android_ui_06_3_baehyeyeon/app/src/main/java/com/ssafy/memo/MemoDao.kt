@@ -5,8 +5,9 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
+import android.util.Log
 import java.sql.SQLException
-
+private const val TAG = "MemoDao_싸피"
 class MemoDao {
 
     // DB선언부
@@ -128,12 +129,13 @@ class MemoDao {
 
     inner class DBHelper(context: Context) : SQLiteOpenHelper(context,"memos.db", null, 1) {
 
-        private lateinit var db: SQLiteDatabase
+        //private lateinit var db: SQLiteDatabase
 
         override fun onCreate(db: SQLiteDatabase) { // 테이블 생성
 
             var query: String = "CREATE TABLE if not exists $DATABASE_TABLE (memoTitle TEXT, memoContent TEXT, memoDate TEXT)"
             db.execSQL(query)
+            Log.d(TAG, "onCreate: DB 생성")
 
         }
 
