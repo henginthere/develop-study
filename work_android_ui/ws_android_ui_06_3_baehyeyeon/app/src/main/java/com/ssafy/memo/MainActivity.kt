@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
@@ -15,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import kotlin.math.log
 
 
 private const val TAG = "MainActivity_싸피"
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     //DB 선언부
     private var memoDao = MemoDao()
+    private var memo = mutableListOf<MemoDto>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,8 +58,12 @@ class MainActivity : AppCompatActivity() {
 
         //리스트 항목 클릭 시 사용할 intent 객체 생성
         val intent = Intent(this, MemoEditActivity::class.java)
-        var memo = memoDao.selectAllMemos();
+        memo = memoDao.selectAllMemos();
         listView.setOnItemClickListener { parent, view, position, id ->
+            Log.d(TAG, "position : $position")
+            Log.d(TAG, "title : ${memo[position].memoTitle}")
+            Log.d(TAG, "content : ${memo[position].memoContent}")
+            Log.d(TAG, "date : ${memo[position].memoDate}")
             intent.putExtra("todo", memo[position].memoTitle)
             intent.putExtra("detail", memo[position].memoContent)
             intent.putExtra("time", memo[position].memoDate)
@@ -81,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         //새 리스트 만들기
         memoList = arrayListOf()
         //var memo: MutableList<MemoDto>
-        var memo = memoDao.selectAllMemos()
+        memo = memoDao.selectAllMemos()
         for (i: Int in 0 until memo.size) {
             val title = memo[i].memoTitle
             val date = memo[i].memoDate
