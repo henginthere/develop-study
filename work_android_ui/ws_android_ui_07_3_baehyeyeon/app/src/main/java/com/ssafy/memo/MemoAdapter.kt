@@ -21,7 +21,9 @@ class MemoAdapter(
 
     override fun onBindViewHolder(holder: MemoViewHolder, position: Int) {
         // 한 행에 데이터를 넣어준다.
-        holder.tvMemo.text = objects[position].memoTitle + " "+ objects[position].memoDate
+        holder.tvMemo.text = objects[position].memoTitle
+        holder.tvContent.text = objects[position].memoContent
+        holder.tvDate.text = objects[position].memoDate
         //Log.d(TAG, "onBindViewHolder: $position 행에 ${objects[position]} 데이터 삽입")
 
         // OnItemClickListener 연결
@@ -40,7 +42,9 @@ class MemoAdapter(
 }
 
 class MemoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnCreateContextMenuListener {
-    var tvMemo = itemView.findViewById(R.id.tv_memo) as TextView
+    var tvMemo = itemView.findViewById(R.id.title) as TextView
+    var tvContent = itemView.findViewById(R.id.contents) as TextView
+    var tvDate = itemView.findViewById(R.id.date) as TextView
 
     fun bindOnItemClickListener(onItemClickListener: MemoAdapter.OnItemClickListener) {
         itemView.setOnClickListener {
