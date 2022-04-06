@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomIntro">
+        <attr name="logoImg" format="integer|reference"/>
+        <attr name="message" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="CustomRecyclerView">
+        <attr name="Num" format="string"/>
+        <attr name="memoTitle" format="string"/>
+        <attr name="memoContent" format="string"/>
+        <attr name="memoDate" format="string"/>
+    </declare-styleable>
+</resources>
