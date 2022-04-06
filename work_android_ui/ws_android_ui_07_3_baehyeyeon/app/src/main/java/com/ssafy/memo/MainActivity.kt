@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
             val returnDetail = intent!!.getStringExtra("inputDetail").toString()
             val returnTime = intent!!.getStringExtra("inputTime").toString()
             val num = intent.getIntExtra("inputNum",0)
-
+            Log.d(TAG, "$num")
             val state = intent.getIntExtra("state",0)
             //받아온 데이터로 메모 생성
             val tmpMemo = MemoDto(returnTodo, returnDetail, returnTime)
@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // 메세지 MEMO 추가
+    //메세지 MEMO 추가
     private fun createSMSMemo(intent: Intent?) {
         if (intent != null) {
             // MemoReceiver에서 온 Data
