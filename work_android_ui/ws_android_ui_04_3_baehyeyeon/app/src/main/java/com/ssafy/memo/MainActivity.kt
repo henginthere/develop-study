@@ -43,8 +43,6 @@ class MainActivity : AppCompatActivity() {
         //리스트 항목 클릭 시 사용할 intent 객체 생성
         val intent = Intent(this, MemoEditActivity::class.java)
 
-
-
         listView.setOnItemClickListener { parent, view, position, id ->
             intent.putExtra("todo", memoItemMgr.memos[position].title)
             intent.putExtra("detail", memoItemMgr.memos[position].content)
@@ -119,7 +117,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("time", "")
             intent.putExtra("num", -1)
             memoEditActivityLauncher.launch(intent)
-        }
+       }
         return super.onOptionsItemSelected(item)
     }
 
