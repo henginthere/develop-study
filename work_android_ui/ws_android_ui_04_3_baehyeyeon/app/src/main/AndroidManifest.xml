@@ -8,7 +8,7 @@
         android:label="메모앱"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Ws_android_ui_02_3_baehyeyeon">
+        android:theme="@style/Theme.Ws_android_ui_04_3_baehyeyeon">
         <activity
             android:name=".MemoEditActivity"
             android:exported="false" />
