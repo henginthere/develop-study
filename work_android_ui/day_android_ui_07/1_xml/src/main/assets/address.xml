@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<주소록>
+    <회원>
+        <name>diana</name>
+        <phone type="휴대폰">010-1234-5678</phone>
+        <phone type="집">02-1234-5678</phone>
+    </회원>
+    <회원>
+        <name>diem</name>
+        <phone type="사무실">02-1234-5678</phone>
+    </회원>
+</주소록>
