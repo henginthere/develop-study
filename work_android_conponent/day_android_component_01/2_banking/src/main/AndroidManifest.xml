@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ssafy.banking">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Day_android_component_01">
+        <activity
+            android:name="com.ssafy.banking.Banking4Result"
+            android:label="이체결과"/>
+        <activity
+            android:name="com.ssafy.banking.Banking3Transfer"
+            android:label="계좌이체"/>
+
+        <activity
+            android:name="com.ssafy.banking.Banking2Account"
+            android:label="계좌조회"/>
+        <!--<activity
+            android:name="com.ssafy.banking.Banking2Account"
+            android:label="계좌조회"
+            android:launchMode="singleTop"/>-->
+        <!--<activity
+            android:name="com.ssafy.banking.Banking2Account"
+            android:exported="true"
+            android:label="계좌조회"
+            android:launchMode="singleTask"/>-->
+        <!--<activity
+            android:name="com.ssafy.banking.Banking2Account"
+            android:exported="true"
+            android:label="계좌조회"
+            android:launchMode="singleInstance"/>-->
+
+        <activity
+            android:name="com.ssafy.banking.Banking1Main"
+            android:label="뱅킹메인">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
