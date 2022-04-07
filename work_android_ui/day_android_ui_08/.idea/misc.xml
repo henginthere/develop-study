@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/SSAFY/gumi06_07th_baehyeyeon/work_android_ui/day_android_ui_08/app/src/main/res/layout/activity_app_bar_layout.xml" value="0.2821557971014493" />
+        <entry key="..\:/SSAFY/gumi06_07th_baehyeyeon/work_android_ui/day_android_ui_08/app/src/main/res/layout/activity_collapsing_toolbar_layout.xml" value="0.2821557971014493" />
+        <entry key="..\:/SSAFY/gumi06_07th_baehyeyeon/work_android_ui/day_android_ui_08/app/src/main/res/layout/activity_custom_view.xml" value="0.20625" />
+        <entry key="..\:/SSAFY/gumi06_07th_baehyeyeon/work_android_ui/day_android_ui_08/app/src/main/res/layout/activity_toolbar.xml" value="0.20625" />
+        <entry key="..\:/SSAFY/gumi06_07th_baehyeyeon/work_android_ui/day_android_ui_08/app/src/main/res/layout/custom_name_card_view.xml" value="0.20625" />
+        <entry key="..\:/SSAFY/gumi06_07th_baehyeyeon/work_android_ui/day_android_ui_08/paint/src/main/res/layout/activity_main.xml" value="0.31875" />
+        <entry key="..\:/SSAFY/gumi06_07th_baehyeyeon/work_android_ui/day_android_ui_08/toolbar/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/SSAFY/gumi06_07th_baehyeyeon/work_android_ui/day_android_ui_08/toolbar/src/main/res/menu/menu_main.xml" value="0.31875" />
+        <entry key="..\:/git/ja/workspace_android_ui/day_android_ui_08/app/src/main/res/layout/activity_app_bar_layout.xml" value="0.25364583333333335" />
+        <entry key="..\:/git/ja/workspace_android_ui/day_android_ui_08/app/src/main/res/layout/activity_collapsing_toolbar_layout.xml" value="0.25364583333333335" />
+        <entry key="..\:/git/ja/workspace_android_ui/day_android_ui_08/app/src/main/res/layout/activity_custom_view.xml" value="0.25364583333333335" />
+        <entry key="..\:/git/ja/workspace_android_ui/day_android_ui_08/app/src/main/res/layout/activity_dialog.xml" value="0.25364583333333335" />
+        <entry key="..\:/git/ja/workspace_android_ui/day_android_ui_08/app/src/main/res/layout/activity_effect.xml" value="0.25364583333333335" />
+        <entry key="..\:/git/ja/workspace_android_ui/day_android_ui_08/app/src/main/res/layout/activity_main.xml" value="0.2390625" />
+        <entry key="..\:/git/ja/workspace_android_ui/day_android_ui_08/app/src/main/res/layout/activity_toolbar.xml" value="0.25364583333333335" />
+        <entry key="..\:/git/ja/workspace_android_ui/day_android_ui_08/app/src/main/res/layout/custom_name_card_view.xml" value="0.4" />
+        <entry key="..\:/git/ja/workspace_android_ui/day_android_ui_08/app/src/main/res/layout/dialog.xml" value="0.25364583333333335" />
+        <entry key="..\:/git/ja/workspace_android_ui/day_android_ui_08/app/src/main/res/menu/menu_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/git/ja/workspace_android_ui/day_android_ui_08/paint/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
