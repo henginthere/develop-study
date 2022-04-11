@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FragmentTab</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="mon">월요일</string>
+    <string name="tue">화요일</string>
+    <string name="wed">수요일</string>
+    <string name="thu">목요일</string>
+    <string name="fri">금요일</string>
+</resources>

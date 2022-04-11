@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple_200"
+    tools:context=".fragment.BFragment">
+
+    <TextView
+        android:id="@+id/tv_fragment_name_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fragment B"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_status_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="상태 파라미터"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_fragment_name_b"/>
+
+    <TextView
+        android:id="@+id/tv_message_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="메시지 파라미터"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_status_b" />
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="add"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_message_b"/>
+
+    <Button
+        android:id="@+id/btn_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="remove"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toEndOf="@id/btn_add"
+        app:layout_constraintTop_toBottomOf="@id/tv_message_b"/>
+
+    <FrameLayout
+        android:id="@+id/view_stub"
+        android:layout_width="216dp"
+        android:layout_height="174dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
