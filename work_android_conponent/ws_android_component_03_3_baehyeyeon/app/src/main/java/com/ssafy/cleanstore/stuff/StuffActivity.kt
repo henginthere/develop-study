@@ -46,8 +46,8 @@ class StuffActivity : AppCompatActivity() {
         binding.listView.setOnItemClickListener { parent, view, position, id ->
             intent.putExtra("inputItemName", items[position].itemName)
             intent.putExtra("inputItemCount", items[position].itemCnt)
-            intent.putExtra("num", position)
-
+            intent.putExtra("inputId", items[position].id)
+            Log.d(TAG, "onCreate: ${items[position].id}")
             stuffEditActivityLauncher.launch(intent)
         }
 
@@ -80,7 +80,7 @@ class StuffActivity : AppCompatActivity() {
     private fun setList() {
         //새 리스트 만들기
         //itemList = arrayListOf()
-        Log.d(TAG, "setList: ????????????")
+        //Log.d(TAG, "setList: ????????????")
         items = MyServiceConnection.myService.selectAll();
 
 
@@ -97,20 +97,21 @@ class StuffActivity : AppCompatActivity() {
     ) {
         if (it.resultCode == Activity.RESULT_OK) {
             val intent = it.data
-            Log.d(TAG, ":데이터 전달 됐음!!!!!!!!!!! ")
+            //Log.d(TAG, ":데이터 전달 됐음!!!!!!!!!!! ")
             val returnItemName = intent!!.getStringExtra("inputItemName").toString()
             val returnItemCount = intent!!.getIntExtra("inputItemCount",0)
-            val index = intent!!.getIntExtra("inputIndex",0)
+            val index = intent!!.getIntExtra("inputId",0)
             val state =intent!!.getIntExtra("state",0)
 
 
             val tmpItem = Stuff(returnItemName, returnItemCount)
+            val updateItem = Stuff(index, returnItemName, returnItemCount)
             when(state){
 //                0->items.add(tmpItem)
 //                1->items[index] = tmpItem
 //                2->items.removeAt(index)
                 0->MyServiceConnection.myService.insert(tmpItem,this)
-                1->MyServiceConnection.myService.update(tmpItem)
+                1->MyServiceConnection.myService.update(updateItem)
                 2->MyServiceConnection.myService.delete(index)
             }
             setList()

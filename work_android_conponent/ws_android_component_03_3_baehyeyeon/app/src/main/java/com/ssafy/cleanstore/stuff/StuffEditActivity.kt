@@ -25,7 +25,7 @@ class StuffEditActivity : AppCompatActivity() {
 
         val initItemName = intent.getStringExtra("inputItemName")
         val initItemCnt = intent.getIntExtra("inputItemCount",0)
-        val index = intent.getIntExtra("num",0)
+        val index = intent.getIntExtra("inputId",0)
 
         binding.itemName.setText(initItemName)
         binding.itemCnt.setText(initItemCnt.toString())
@@ -46,7 +46,7 @@ class StuffEditActivity : AppCompatActivity() {
                 val intent = Intent(this, StuffActivity::class.java)
                 intent.putExtra("inputItemName", newName)
                 intent.putExtra("inputItemCount", newCnt)
-                intent.putExtra("inputIndex",index)
+                intent.putExtra("inputId",index)
                 println(newName)
 
                 //등록
@@ -55,6 +55,7 @@ class StuffEditActivity : AppCompatActivity() {
                 }
                 //수정
                 else{
+                    intent.putExtra("inputId", index)
                     intent.putExtra("state",1)
                 }
 
@@ -74,7 +75,7 @@ class StuffEditActivity : AppCompatActivity() {
 
         binding.btnDelete.setOnClickListener {
             val intent = Intent(this, StuffActivity::class.java)
-            intent.putExtra("inputIndex",index)
+            intent.putExtra("inputId",index)
             intent.putExtra("state",2)
 
             setResult(RESULT_OK,intent)

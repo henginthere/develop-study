@@ -105,14 +105,16 @@ class StuffDao {
 
     // 물품 삭제 method
     fun stuffDelete(stuffId: Int){
+        Log.d(TAG, "stuffDelete: 삭제???")
         sqlDB.beginTransaction()
-        val result = sqlDB.delete(TABLE_NAME, "_id=?", arrayOf(stuffId.toString()))
+        //val result = sqlDB.delete(TABLE_NAME, "_id=?", arrayOf(stuffId.toString()))
         // sql을 이용한 삭제
-        //val query = "delete from $TABLE where _id=$id";
-        // db.execSQL(query)
-        if (result > 0) {
+        val query = "delete from $TABLE_NAME where _id=$stuffId";
+        Log.d(TAG, "stuffDelete: $stuffId")
+        sqlDB.execSQL(query)
+        //if (result > 0) {
             sqlDB.setTransactionSuccessful()
-        }
+        //}
         sqlDB.endTransaction()
     }
 
