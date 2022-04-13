@@ -58,20 +58,16 @@ class StuffDao {
     }
 
     // 특정 물품 조회 method
-    fun stuffSelect(stuffId: Int): Map<String, Any> {
-        val columns = arrayOf("_id", "name", "count")
-        val cursor = sqlDB.query(TABLE_NAME, columns, "_id=?", arrayOf(stuffId.toString()), null, null, null)
-        var result = mutableMapOf<String, Any>()
-        if (cursor.moveToNext()) {
-            result.put("_id", cursor.getInt(0))
-            result.put("name", cursor.getString(1))
-            result.put("count", cursor.getInt(2))
+    fun stuffSelect(stuffId: Int): Stuff? {
+        sqlDB.rawQuery("SELECT * FROM $TABLE_NAME WHERE id = $stuffId",null).use{
+            return if(it.moveToFirst())
+                Stuff(it.getInt(0), it.getString(1), it.getInt(2))
+            else
+                null
         }
-        return result
-
     }
 
-    // 물품 조회 method
+    // 물품 전체 조회 method
     fun stuffSelectAll(): MutableList<Stuff> {
         val columns = arrayOf("_id", "name", "count")
         val cursor = sqlDB.query(TABLE_NAME, columns, null,null, null, null, null)
