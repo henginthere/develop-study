@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.ssafy.cleanstore.databinding.ActivityStuffEditBinding
+import com.ssafy.cleanstore.dto.Stuff
 
 private const val TAG = "StuffEditActivity_싸피"
 
@@ -23,15 +24,18 @@ class StuffEditActivity : AppCompatActivity() {
         setContentView(binding.root)
         Log.d(TAG, "onCreate: ")
 
-        val initItemName = intent.getStringExtra("inputItemName")
-        val initItemCnt = intent.getIntExtra("inputItemCount",0)
+        val initStuff = intent.getSerializableExtra("inputStuff") as Stuff
+        //val initItemName = intent.getStringExtra("inputItemName")
+        //val initItemCnt = intent.getIntExtra("inputItemCount",0)
         val index = intent.getIntExtra("inputId",0)
 
-        binding.itemName.setText(initItemName)
-        binding.itemCnt.setText(initItemCnt.toString())
+//        binding.itemName.setText(initItemName)
+//        binding.itemCnt.setText(initItemCnt.toString())
+        binding.itemName.setText(initStuff.itemName)
+        binding.itemCnt.setText(initStuff.itemCnt.toString())
 
         //수정모드일 때 삭제버튼 보인다
-        if(initItemName!!.isNotEmpty()){
+        if(initStuff.itemName!!.isNotEmpty()){
             binding.btnDelete.visibility = View.VISIBLE
         }
 
@@ -44,13 +48,14 @@ class StuffEditActivity : AppCompatActivity() {
                 Toast.makeText(this, "빈 내용이 있습니다.", Toast.LENGTH_SHORT).show()
             } else {
                 val intent = Intent(this, StuffActivity::class.java)
-                intent.putExtra("inputItemName", newName)
-                intent.putExtra("inputItemCount", newCnt)
+                intent.putExtra("inputStuff", Stuff(newName, newCnt))
+//                intent.putExtra("inputItemName", newName)
+//                intent.putExtra("inputItemCount", newCnt)
                 intent.putExtra("inputId",index)
                 println(newName)
 
                 //등록
-                if(initItemName.isEmpty()){
+                if(initStuff.itemName.isEmpty()){
                     intent.putExtra("state",0)
                 }
                 //수정
@@ -74,7 +79,9 @@ class StuffEditActivity : AppCompatActivity() {
         }
 
         binding.btnDelete.setOnClickListener {
+            Log.d(TAG, "onCreate: 삭제 버튼 누름")
             val intent = Intent(this, StuffActivity::class.java)
+            intent.putExtra("inputStuff", Stuff("", 0))
             intent.putExtra("inputId",index)
             intent.putExtra("state",2)
 

@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "ws_android_component_03_3_baehyeyeon"
 include ':app'
+include ':navigation'

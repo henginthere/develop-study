@@ -41,6 +41,10 @@ class BoundService : Service() {
         return stuffDao.stuffDelete(id)
     }
 
+    fun select(id: Int):Stuff?{
+        return stuffDao.stuffSelect(id)
+    }
+
 }
 
 class MyLocalBinder : Binder(){
