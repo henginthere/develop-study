@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "679254378885",
+    "project_id": "cleanstore-ddd5a",
+    "storage_bucket": "cleanstore-ddd5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679254378885:android:a9f2c19289479b1739dcec",
+        "android_client_info": {
+          "package_name": "com.ssafy.cleanstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "679254378885-obivpna36e0htd54om979g1lgur0hsfd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ssafy.cleanstore",
+            "certificate_hash": "dc0f0fddf33171d4a34e24be40265f835260ed48"
+          }
+        },
+        {
+          "client_id": "679254378885-ifs9t00idsghaasnd4lnfaptr936mth9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_484RXmp7F8l-hIolIl_sFMZphMlYSpI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "679254378885-ifs9t00idsghaasnd4lnfaptr936mth9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
