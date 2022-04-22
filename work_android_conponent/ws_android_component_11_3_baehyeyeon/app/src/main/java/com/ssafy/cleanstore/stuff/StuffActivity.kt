@@ -12,6 +12,7 @@ import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,7 @@ class StuffActivity : AppCompatActivity() {
     private lateinit var sensorManager: SensorManager
     private lateinit var sensorEventListener: SensorEventListener
 
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG, "onCreate: ")
@@ -45,7 +47,7 @@ class StuffActivity : AppCompatActivity() {
 
         sensorManager.registerListener(sensorEventListener, accelerometerSensor, SensorManager.SENSOR_DELAY_UI)
 
-        setList()
+        setList(0)
         val intent = Intent(this, StuffEditActivity::class.java)
         binding.fab.setOnClickListener {
             intent.putExtra("inputStuff",Stuff("",0,""))
@@ -94,16 +96,14 @@ class StuffActivity : AppCompatActivity() {
 
             if(gForce>SHAKE_GRAVITY){
                 Log.d(TAG, "onSensorChanged: $gForce")
-                setList()
+                setList(1)
             }
-
         }
-
         override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
     }
 
     //리스트 초기화
-    private fun setList() {
+    private fun setList(a: Int) {
         //새 리스트 만들기
         //itemList = arrayListOf()
         //Log.d(TAG, "setList: ????????????")
@@ -115,6 +115,9 @@ class StuffActivity : AppCompatActivity() {
         //ListView와 adapter 연결
         binding.listView.adapter = adapter
         adapter.notifyDataSetChanged()
+        if(a==1) {
+            Toast.makeText(this, "물품 정보가 갱신되었습니다.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private val stuffEditActivityLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
@@ -143,7 +146,7 @@ class StuffActivity : AppCompatActivity() {
                     MyServiceConnection.myService.delete(index)
                 }
             }
-            setList()
+            setList(0)
         }
 
     }
