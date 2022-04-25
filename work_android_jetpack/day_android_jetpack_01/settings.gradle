@@ -1,0 +1,23 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "day_android_jetpack_01"
+include ':app'
+include ':app2'
+include ':view_model_ktx'
+include ':view_model_ktx2'
+include ':view_model_ktx3'
+include ':data_binding'
+include ':data_binding2'
+include ':data_binding3'
