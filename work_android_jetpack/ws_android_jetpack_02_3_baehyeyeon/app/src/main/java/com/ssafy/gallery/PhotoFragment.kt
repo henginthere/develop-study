@@ -5,13 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.setFragmentResultListener
+import com.ssafy.gallery.database.GalleryDao
 import com.ssafy.gallery.databinding.FragmentPhotoBinding
 import com.ssafy.gallery.util.Utils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
+private const val ARG_PHOTO_ID = "photo_id"
 class PhotoFragment : Fragment() {
 
+    private lateinit var photo : Photo
     private lateinit var binding : FragmentPhotoBinding
+    private val galleryRepository = GalleryRepository.get()
+    private var photoId : Int = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        //넘어온 ID값 받기
+        photoId = arguments?.getSerializable(ARG_PHOTO_ID) as Int
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,23 +37,36 @@ class PhotoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // 이미지 클릭 시 Gallery Fragment로 이동
-        binding.ivPhoto.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fcv_main, GalleryFragment())
-                .commit()
+        CoroutineScope(Dispatchers.Main).launch {
+            photo = galleryRepository.getPhoto(photoId)
+            updateUI(photo)
         }
 
-        // Gallery Fragment에서 넘어온 Photo를 읽고, 화면에 출력
-        setFragmentResultListener("ItemClick"){_, bundle ->
-            val photo = bundle.getSerializable("Photo") as Photo
-            
-            binding.tvDate.text = Utils.formatter().format(photo.date)
-            binding.tvLocation.text = photo.location
-            val packageName = "com.ssafy.gallery"
-            val resId = view.resources.getIdentifier(photo.src, "drawable", packageName)
-            binding.ivPhoto.setImageResource(resId)
+    }
+
+    private fun updateUI(photo: Photo){
+        binding.tvLocation.text = photo.location
+        binding.tvDate.apply {
+            val sdf = Utils.formatter().format(photo.date).toString()
+            text = sdf
+        }
+        binding.ivPhoto.apply{
+            val resId = view?.resources?.getIdentifier(photo.src, "drawble", context.packageName)
+            if(resId!=null){
+                setImageResource(resId)
+            }
+        }
+    }
+
+    companion object {
+        // Argument에 Bundle을 넘겨 ID 값을 저장하는 Instance 함수 구현
+        fun newInstance(photoId: Int): PhotoFragment {
+            val args = Bundle().apply {
+                putSerializable(ARG_PHOTO_ID, photoId)
+            }
+            return PhotoFragment().apply {
+                arguments = args
+            }
         }
     }
 
