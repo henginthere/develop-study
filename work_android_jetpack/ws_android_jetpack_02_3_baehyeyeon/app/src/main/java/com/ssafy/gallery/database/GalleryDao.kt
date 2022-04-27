@@ -1,17 +1,24 @@
 package com.ssafy.gallery.database
 
-import androidx.room.*
+import android.content.Context
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteOpenHelper
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.ssafy.gallery.Photo
+import java.sql.SQLException
 
 @Dao
 interface GalleryDao {
-    @Query("SELECT * FROM photos")
-    suspend fun getPhotos(): MutableList<Photo>
 
-    @Query("SELECT * FROM photos WHERE PHOTONUM = (:num)")
+    @Query("SELECT * FROM photo")
+    suspend fun getPhotos():List<Photo>
+
+    @Query("SELECT * FROM photo WHERE num =(:num)")
     suspend fun getPhoto(num: Int): Photo
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPhoto(dto: Photo)
-
+    suspend fun insert(photo: Photo)
 }
-

@@ -2,14 +2,13 @@ package com.ssafy.gallery
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.withTransaction
 import com.ssafy.gallery.database.GalleryDatabase
-import com.ssafy.gallery.database.Photo
 
-private  const val DATABASE_NAME = "photo-database.db"
-
+//GalleryRepository는 싱글톤(앱이 실행되는 동안 하나의 인스턴스만 생성한다)
+private const val DATABASE_NAME = "gallery-database"
 class GalleryRepository private constructor(context: Context){
-    private val database : GalleryDatabase = Room.databaseBuilder(
+
+    private val database: GalleryDatabase = Room.databaseBuilder(
         context.applicationContext,
         GalleryDatabase::class.java,
         DATABASE_NAME
@@ -17,19 +16,11 @@ class GalleryRepository private constructor(context: Context){
 
     private val galleryDao = database.galleryDao()
 
-    suspend fun getPhotos() : MutableList<Photo> = database.withTransaction {
-        galleryDao.getPhotos()
-    }
+    suspend fun getPhotos(): List<Photo> = galleryDao.getPhotos()
+    suspend fun getPhoto(num: Int): Photo = galleryDao.getPhoto(num)
+    suspend fun insert(photo: Photo) = galleryDao.insert(photo)
 
-    suspend fun getPhoto(num : Int) : Photo =  database.withTransaction {
-        galleryDao.getPhoto(num)
-    }
-
-    suspend fun insertPhoto(dto: Photo) = database.withTransaction {
-        galleryDao.insertPhoto(dto)
-    }
-
-    companion object {
+    companion object{
         private var INSTANCE: GalleryRepository? = null
 
         fun initialize(context: Context) {
@@ -40,7 +31,8 @@ class GalleryRepository private constructor(context: Context){
 
         fun get(): GalleryRepository {
             return INSTANCE ?:
-            throw IllegalStateException("NoteRepository must be initialized")
+            throw IllegalStateException("GalleryRepository must be initialized")
         }
     }
+
 }

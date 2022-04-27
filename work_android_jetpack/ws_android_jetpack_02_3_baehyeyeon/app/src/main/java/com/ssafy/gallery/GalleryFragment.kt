@@ -2,15 +2,14 @@ package com.ssafy.gallery
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
+
 import androidx.recyclerview.widget.GridLayoutManager
-import com.ssafy.gallery.database.Photo
+import androidx.recyclerview.widget.RecyclerView
+import com.ssafy.gallery.database.GalleryDao
 import com.ssafy.gallery.databinding.FragmentGalleryBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,19 +19,31 @@ private const val TAG = "GalleryFragment_싸피"
 
 class GalleryFragment : Fragment() {
 
-    private lateinit var ctx: Context
+    // Fragment교체 기능을 호스팅 Activity에 위임하기 위해 구현
+    // Callbacks에서는 Fragment가 필요로 하는 일을 수행하게 하는 함수를 정의
+    interface Callbacks {
+        fun onPhotoSelected(photoId: Int)
+    }
+
+    private var callbacks: Callbacks? = null
     private lateinit var binding: FragmentGalleryBinding
+    private var galleryRepository =  GalleryRepository.get()
+    private var photos : List<Photo> = emptyList()
+    private var galleryAdapter : GalleryAdapter? = GalleryAdapter(emptyList())
+    private lateinit var galleryRecyclerView : RecyclerView
 
-    private lateinit var photoViewModel: PhotoViewModel
-    private lateinit var galleryRepository: GalleryRepository
-    private lateinit var galleryAdapter: GalleryAdapter
-    private lateinit var photo: Photo
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
+    //호스팅 액티비티에 연결될 때 호출
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        ctx = context
-        galleryRepository = GalleryRepository.get()
-        photoViewModel = PhotoViewModel()
+        // onAttach의 인자로 전달된 Context 객체의 참조를 callbacks의 속성에 저장한다.
+        callbacks = context as Callbacks?
+        // 인자로 전달된 Context 객체의 참조를 callbacks의 속성에 지정할 때
+        // GalleryFragment.Callbacks 타입으로 변환하기 때문에
+        // GalleryFragment를 호스팅하는 액티비티는 반드시 Callbacks 인터페이스를 구현해야한다.
     }
 
     override fun onCreateView(
@@ -40,45 +51,39 @@ class GalleryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGalleryBinding.inflate(layoutInflater)
+        galleryRecyclerView = binding.recyclerView
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 갤러리 화면 갱신
-        CoroutineScope(Dispatchers.IO).launch {
-            updateGallery()
-        }
+        CoroutineScope(Dispatchers.Main).launch {
+            photos = galleryRepository.getPhotos()
+            galleryAdapter = GalleryAdapter(photos)
 
-    }
+            galleryAdapter!!.setItemClickListener(object: GalleryAdapter.ItemClickListener{
+                override fun onClick(view: View, dto: Photo, position: Int) {
+                    callbacks?.onPhotoSelected(dto.num)
+                }
+            })
 
-
-    private suspend fun updateGallery(){
-        Log.d(TAG, "updateGallery: ")
-
-        photoViewModel.photoList = galleryRepository.getPhotos()
-
-        galleryAdapter = GalleryAdapter(ctx, photoViewModel.photoList)
-
-        binding.rcvMain.apply {
-            adapter = galleryAdapter
-            layoutManager = GridLayoutManager(ctx, 3)
-        }
-
-        // 썸네일 클릭 시 Photo Fragment로 이동
-        val itemClickListener = object : GalleryAdapter.OnItemClickListener{
-            override fun onItemClick(view: View, position: Int) {
-                Log.d(TAG, "onItemClick: $position")
-                photo = photoViewModel.photoList[position]
-
-                setFragmentResult("ItemClick", bundleOf("Photo" to photo))
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fcv_main, PhotoFragment())
-                    .commit()
+            galleryRecyclerView.apply {
+                layoutManager = GridLayoutManager(context,3)
+                adapter = galleryAdapter
             }
         }
+    }
 
-        galleryAdapter.onItemClickListener = itemClickListener
+    override fun onDetach() {
+        super.onDetach()
+        // 이 함수가 호출될 때 호스팅 액티비티를 사용할 수 없거나 호스팅 액티비티가 계속 존재한다는 보장이 없기 때문에 null 입력
+        callbacks = null
+    }
+
+    companion object {
+        fun newInstance(): GalleryFragment {
+            return GalleryFragment()
+        }
     }
 }
