@@ -5,28 +5,16 @@
 
     <data>
         <variable
-            name="photo"
-            type="com.ssafy.gallery.Photo" />
+            name="viewModel"
+            type="com.ssafy.gallery.PhotoViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:layout_margin="1dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/iv_thumbnail"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_margin="1dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:imageUrl="@{photo.src}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:src="@drawable/apple"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        app:imageUrl="@{viewModel.src}"
+        tools:src="@drawable/apple" />
 
 </layout>
