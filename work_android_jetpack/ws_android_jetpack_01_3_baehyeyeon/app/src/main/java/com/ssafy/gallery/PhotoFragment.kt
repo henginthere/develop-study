@@ -9,9 +9,25 @@ import androidx.fragment.app.setFragmentResultListener
 import com.ssafy.gallery.databinding.FragmentPhotoBinding
 import com.ssafy.gallery.util.Utils
 
+private const val ARG_PHOTO_ID = "photo_id"
 class PhotoFragment : Fragment() {
 
+    private lateinit var photo : Photo
     private lateinit var binding : FragmentPhotoBinding
+    private var galleryDao = GalleryDao()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        galleryDao.dbOpenHelper(requireContext())
+        galleryDao.open()
+
+        //넘어온 ID값 받기
+        val photoId: Int = arguments?.getSerializable(ARG_PHOTO_ID) as Int
+
+        //해당 ID로 DB 검색
+        photo = galleryDao.selectPhotos(photoId)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,23 +39,32 @@ class PhotoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        updateUI(photo)
+    }
 
-        // 이미지 클릭 시 Gallery Fragment로 이동
-        binding.ivPhoto.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fcv_main, GalleryFragment())
-                .commit()
+    private fun updateUI(photo: Photo){
+        binding.tvLocation.text = photo.location
+        binding.tvDate.apply {
+            val sdf = Utils.formatter().format(photo.date).toString()
+            text = sdf
         }
+        binding.ivPhoto.apply{
+            val resId = view?.resources?.getIdentifier(photo.src, "drawble", context.packageName)
+            if(resId!=null){
+                setImageResource(resId)
+            }
+        }
+    }
 
-        // Gallery Fragment에서 넘어온 Photo를 읽고, 화면에 출력
-        setFragmentResultListener("ItemClick"){_, bundle ->
-            val photo = bundle.getSerializable("Photo") as Photo
-            
-            binding.tvDate.text = Utils.formatter().format(photo.date)
-            binding.tvLocation.text = photo.location
-            val packageName = "com.ssafy.gallery"
-            val resId = view.resources.getIdentifier(photo.src, "drawable", packageName)
-            binding.ivPhoto.setImageResource(resId)
+    companion object {
+        // Argument에 Bundle을 넘겨 ID 값을 저장하는 Instance 함수 구현
+        fun newInstance(photoId: Int): PhotoFragment {
+            val args = Bundle().apply {
+                putSerializable(ARG_PHOTO_ID, photoId)
+            }
+            return PhotoFragment().apply {
+                arguments = args
+            }
         }
     }
 
