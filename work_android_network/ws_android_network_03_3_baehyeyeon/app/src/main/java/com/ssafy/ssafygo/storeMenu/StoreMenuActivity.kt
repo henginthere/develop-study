@@ -55,14 +55,14 @@ class StoreMenuActivity : AppCompatActivity() {
         listview.setOnItemClickListener { parent, view, position, id ->
             val storeMenu = storeMenuList[position]
             requestActivity.launch(Intent(this, StoreMenuDetailActivity::class.java).apply {
-                putExtra("StoreReview", storeMenu)
+                putExtra("StoreMenu", storeMenu)
             })
         }
 
         getStoreMenuInfo(storeId)
     }
 
-    // 리뷰 정보 모두 가져오기
+    // 메뉴 정보 모두 가져오기
     private fun getStoreMenuInfo(storeId: Int) {
         val storeService = ApplicationClass.retrofit.create(StoreMenuService::class.java)
         // enqueue를 통해 비동기적으로 API 호출 작업 수행
