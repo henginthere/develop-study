@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             // 가맹점 정보를 잘 불러왔다면 클릭 가능하다.
             if (storeLayout.isVisible) {
                 // 클릭하면 해당 가맹점의 리뷰확인 가능
-                val intent = Intent(this, StoreMenuDetailActivity::class.java)
+                val intent = Intent(this, StoreMenuActivity::class.java)
                 intent.putExtra("StoreId", STORE_ID)
                 startActivity(intent)
             }

@@ -1,11 +1,16 @@
 package com.ssafy.ssafygo.dto
 import java.io.Serializable
 
-data class StoreMenuDTO(var item: String, var price: Int, var storeId: Int)  : Serializable {
+data class StoreMenuDTO(var name: String, var price: Int, var storeId: Int)  : Serializable {
 
     var id : Int = -1
 
-    constructor(_id: Int, item: String, price: Int, storeId: Int): this(item, price, storeId) {
+    constructor(_id: Int, name: String, price: Int, storeId: Int): this(name, price, storeId) {
         id = _id
     }
+
+    override fun toString(): String {
+        return "이름: $name\n 가격: $price"
+    }
+
 }
